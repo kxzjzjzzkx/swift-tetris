@@ -12,6 +12,7 @@ class GameEngine{
     var lastChangeTime = 0.0
     var timeLimit = 1.0
     
+    
     func moveDown(){
 //        nowSquare.position = CGPoint(x:nowSquare.position.x,y:nowSquare.position.y-unit)
     }

@@ -22,6 +22,14 @@
 		BE30345429A5AD4D0099EAA1 /* secenetestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE30345329A5AD4D0099EAA1 /* secenetestTests.swift */; };
 		BE30345E29A5AD4D0099EAA1 /* secenetestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE30345D29A5AD4D0099EAA1 /* secenetestUITests.swift */; };
 		BE30346029A5AD4D0099EAA1 /* secenetestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE30345F29A5AD4D0099EAA1 /* secenetestUITestsLaunchTests.swift */; };
+		BE54F4DD29B02EE50045981B /* SquareZL.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE54F4DC29B02EE50045981B /* SquareZL.swift */; };
+		BE54F4DF29B02F360045981B /* SquareZR.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE54F4DE29B02F360045981B /* SquareZR.swift */; };
+		BE54F4E129B02FAC0045981B /* SquareSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE54F4E029B02FAC0045981B /* SquareSL.swift */; };
+		BE54F4E329B0303C0045981B /* SquareSR.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE54F4E229B0303C0045981B /* SquareSR.swift */; };
+		BE54F4E529B031890045981B /* SuqareT.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE54F4E429B031890045981B /* SuqareT.swift */; };
+		BE54F4E729B032090045981B /* SuqreO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE54F4E629B032090045981B /* SuqreO.swift */; };
+		BE54F4E929B048C30045981B /* SquarePool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE54F4E829B048C30045981B /* SquarePool.swift */; };
+		BE81E37729AC59D1001E2656 /* SquareL.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81E37629AC59D1001E2656 /* SquareL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +69,14 @@
 		BE30345929A5AD4D0099EAA1 /* secenetestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = secenetestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE30345D29A5AD4D0099EAA1 /* secenetestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secenetestUITests.swift; sourceTree = "<group>"; };
 		BE30345F29A5AD4D0099EAA1 /* secenetestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secenetestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BE54F4DC29B02EE50045981B /* SquareZL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareZL.swift; sourceTree = "<group>"; };
+		BE54F4DE29B02F360045981B /* SquareZR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareZR.swift; sourceTree = "<group>"; };
+		BE54F4E029B02FAC0045981B /* SquareSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareSL.swift; sourceTree = "<group>"; };
+		BE54F4E229B0303C0045981B /* SquareSR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareSR.swift; sourceTree = "<group>"; };
+		BE54F4E429B031890045981B /* SuqareT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuqareT.swift; sourceTree = "<group>"; };
+		BE54F4E629B032090045981B /* SuqreO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuqreO.swift; sourceTree = "<group>"; };
+		BE54F4E829B048C30045981B /* SquarePool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquarePool.swift; sourceTree = "<group>"; };
+		BE81E37629AC59D1001E2656 /* SquareL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +109,13 @@
 			children = (
 				BE14590A29A86C8300ECA3E8 /* SquareEntity.swift */,
 				BE13D58A29A9AABA00E81DCB /* MutiSquareEntity.swift */,
+				BE81E37629AC59D1001E2656 /* SquareL.swift */,
+				BE54F4E629B032090045981B /* SuqreO.swift */,
+				BE54F4DC29B02EE50045981B /* SquareZL.swift */,
+				BE54F4DE29B02F360045981B /* SquareZR.swift */,
+				BE54F4E029B02FAC0045981B /* SquareSL.swift */,
+				BE54F4E229B0303C0045981B /* SquareSR.swift */,
+				BE54F4E429B031890045981B /* SuqareT.swift */,
 			);
 			path = Square;
 			sourceTree = "<group>";
@@ -102,6 +125,7 @@
 			children = (
 				BE279B5F29A74A6700E94A57 /* GameMainLayer.swift */,
 				BE14590D29A89ABC00ECA3E8 /* GameEngine.swift */,
+				BE54F4E829B048C30045981B /* SquarePool.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -295,13 +319,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE54F4E129B02FAC0045981B /* SquareSL.swift in Sources */,
+				BE54F4E529B031890045981B /* SuqareT.swift in Sources */,
 				BE30344029A5AD4C0099EAA1 /* GameScene.swift in Sources */,
 				BE14590E29A89ABC00ECA3E8 /* GameEngine.swift in Sources */,
 				BE14590B29A86C8300ECA3E8 /* SquareEntity.swift in Sources */,
 				BE13D58B29A9AABA00E81DCB /* MutiSquareEntity.swift in Sources */,
+				BE54F4E929B048C30045981B /* SquarePool.swift in Sources */,
 				BE30344229A5AD4C0099EAA1 /* GameViewController.swift in Sources */,
 				BE30343A29A5AD4C0099EAA1 /* AppDelegate.swift in Sources */,
+				BE54F4DF29B02F360045981B /* SquareZR.swift in Sources */,
 				BE279B6029A74A6700E94A57 /* GameMainLayer.swift in Sources */,
+				BE54F4DD29B02EE50045981B /* SquareZL.swift in Sources */,
+				BE81E37729AC59D1001E2656 /* SquareL.swift in Sources */,
+				BE54F4E729B032090045981B /* SuqreO.swift in Sources */,
+				BE54F4E329B0303C0045981B /* SquareSR.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

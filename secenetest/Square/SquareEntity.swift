@@ -67,7 +67,3 @@ class SquareEntity : SKSpriteNode {
     }
     
 }
-
-
-    
-

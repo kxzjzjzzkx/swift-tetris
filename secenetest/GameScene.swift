@@ -23,6 +23,10 @@ class GameScene: SKScene {
     var game: GameEngine? = nil     // 核心处理器
     var mainLayer: GameMainLayer! = nil // 主界面
     
+    let turnBtn = SKSpriteNode(imageNamed: "resources/button_rotate")       // 转向按钮
+    let downBtn = SKSpriteNode(imageNamed: "resources/button_drop")         // 下降按钮
+    
+    
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
@@ -57,14 +61,21 @@ class GameScene: SKScene {
                 
         // 初始化 生成 积木界面
         self.mainLayer = GameMainLayer()
-        self.mainLayer.position = CGPoint(x:self.size.width/2-200,y:self.size.height/3)
-        print(self.mainLayer.position.x)
-        print(self.mainLayer.position.y)
+        self.mainLayer.position = CGPoint(x:self.size.width/2-170,y:self.size.height/3)
         self.addChild(self.mainLayer)
-        self.mainLayer.createNewSquare()
+        
+        // 生成操作界面
+        turnBtn.position = CGPoint(x:self.size.width/3,y:self.size.height/4)
+        turnBtn.setScale(0.3)
+        self.addChild(turnBtn)
+        downBtn.position = CGPoint(x:self.size.width/3+200,y:self.size.height/4)
+        downBtn.setScale(0.3)
+        self.addChild(downBtn)
         
         // 初始化 引擎
         game = GameEngine()
+        
+        self.mainLayer.makeRandomSquare()   // 生成一个随机积木
         
         // 新增积木 后续可以改成 “start”启动，再进行操作
         
@@ -142,29 +153,29 @@ class GameScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
+//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
+//            n.position = pos
+//            n.strokeColor = SKColor.green
+//            self.addChild(n)
+//        }
 //        self.getOne(atPoint: pos)
 //        self.mainLayer?.moveDown()
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
+//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
+//            n.position = pos
+//            n.strokeColor = SKColor.blue
+//            self.addChild(n)
+//        }
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
+//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
+//            n.position = pos
+//            n.strokeColor = SKColor.red
+//            self.addChild(n)
+//        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -174,12 +185,18 @@ class GameScene: SKScene {
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
         guard let touch  = touches.first else { return }
         let location = touch.location(in: self)
-        if(location.x<self.size.width/2){
-            mainLayer?.moveHorizontal(isLeft: true)
+        if(self.turnBtn.contains(location)){
+            print("点击转向")
+            mainLayer.turn()
+        }else if(self.downBtn.contains(location)){
+            print("点击下降到底")
         }else{
-            mainLayer?.moveHorizontal(isLeft: false)
+            if(location.x<self.size.width/2){
+                mainLayer?.moveHorizontal(isLeft: true)
+            }else{
+                mainLayer?.moveHorizontal(isLeft: false)
+            }
         }
-        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
