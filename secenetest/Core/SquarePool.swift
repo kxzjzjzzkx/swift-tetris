@@ -30,11 +30,12 @@ class SquarePool {
             // 进行向下一部的推演
             
             
-//            if(intArray[(x+xFix)+(y-yFix)*10] == 1 ){
-//                print("命中！不可下移")
-//                hitFlag = true      // 命中了。不可移动
-//                break
-//            }
+            if(intArray[(x+xFix)+(y+yFix-1)*10] == 1 ){
+                print("命中！不可下移")
+                hitFlag = true      // 命中了。不可移动
+                nowSquare.setIsEnd() // 本积木生命周期结束
+                break
+            }
         }
         // 推演过程中，如果遇到障碍，表示命中，则不再向下，记录下当前积木的位置
         // 拆分所有小方块，推进到drawArray队列里

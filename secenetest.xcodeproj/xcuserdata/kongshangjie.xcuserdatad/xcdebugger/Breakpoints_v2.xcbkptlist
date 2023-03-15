@@ -78,8 +78,8 @@
             filePath = "secenetest/Square/MutiSquareEntity.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "canDown()"
             landmarkType = "7">
          </BreakpointContent>

@@ -131,6 +131,10 @@ class MutiSquareEntity: SKSpriteNode {
         return self.isEnd
     }
     
+    func setIsEnd() {
+        self.isEnd = true
+    }
+    
     func getLeft() -> Int {
         return self.left
     }
