@@ -68,9 +68,9 @@ class MutiSquareEntity: SKSpriteNode {
             temp.run(.moveTo(y: temp.position.y-unit, duration: 0))
         }
         top -= 1
-        if top == 0 {
-            isEnd = true    // 积木停止移动
-        }
+//        if top == 0 {
+//            isEnd = true    // 积木停止移动
+//        }
     }
     
     func moveLeft(){
@@ -125,6 +125,7 @@ class MutiSquareEntity: SKSpriteNode {
         for temp in shapeEntityArray{
             temp.removeFromParent()
         }
+        shapeEntityArray = [SquareEntity]()
     }
     
     func getIsEnd() -> Bool {
@@ -173,7 +174,7 @@ extension MutiSquareEntity{
     
     // 计算图形的宽度-横线
     func computeMaxWidth(){
-        var widthArray = [
+        let widthArray = [
             shapeArray[shapeArrayIndex][0]+shapeArray[shapeArrayIndex][1]+shapeArray[shapeArrayIndex][2]+shapeArray[shapeArrayIndex][3],
             shapeArray[shapeArrayIndex][4]+shapeArray[shapeArrayIndex][5]+shapeArray[shapeArrayIndex][6]+shapeArray[shapeArrayIndex][7],
             shapeArray[shapeArrayIndex][8]+shapeArray[shapeArrayIndex][9]+shapeArray[shapeArrayIndex][10]+shapeArray[shapeArrayIndex][11],
@@ -184,7 +185,7 @@ extension MutiSquareEntity{
     
     // 计算图形的长度-竖线
     func computeMaxLength(){
-        var lengthArray = [
+        let lengthArray = [
             shapeArray[shapeArrayIndex][0]+shapeArray[shapeArrayIndex][4]+shapeArray[shapeArrayIndex][8]+shapeArray[shapeArrayIndex][12],
             shapeArray[shapeArrayIndex][1]+shapeArray[shapeArrayIndex][5]+shapeArray[shapeArrayIndex][9]+shapeArray[shapeArrayIndex][13],
             shapeArray[shapeArrayIndex][2]+shapeArray[shapeArrayIndex][6]+shapeArray[shapeArrayIndex][10]+shapeArray[shapeArrayIndex][14],
@@ -192,9 +193,5 @@ extension MutiSquareEntity{
         ]
         self.length = lengthArray.max() ?? 0
     }
-    
-    
-    
-    
-    
+
 }

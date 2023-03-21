@@ -12,6 +12,7 @@ class SquareEntity : SKSpriteNode {
 
     var leftLimit = 4
     var downLimit = 20
+    var sid = 0
     
     
     required public init(imageNamed: String){
@@ -22,6 +23,10 @@ class SquareEntity : SKSpriteNode {
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    func setSid(sid:Int){
+        self.sid = sid
     }
     
     // 是否能左移动

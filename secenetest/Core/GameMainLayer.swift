@@ -15,8 +15,10 @@ class GameMainLayer: SKNode{
     var countSquare: SKSpriteNode! = nil            // 累计积木
     
     var lastChangeTime = 0.0        // 最后修改时间
-    var timeLimit = 1.0             // 行动间隔时间
+    var timeLimit = 0.3             // 行动间隔时间
     
+    var gameStatus = "playing"
+    var gameScore = 0
     
     override init(){
         super.init()
@@ -86,41 +88,58 @@ class GameMainLayer: SKNode{
     
     // 游戏进行中
     func playing(currentTime: CFTimeInterval){
-//        print("当前时间 ",currentTime)
         // 单位时间到，game继续进行
-        if(currentTime-lastChangeTime>=timeLimit){
-            lastChangeTime = currentTime
-            if canDown() {
-                nowMutiSquare.moveDown()    // 方块可以移动，进行移动
+        if(gameStatus=="game over"){
+            // game over
+        }else{
+            if(currentTime-lastChangeTime>=timeLimit){
+                lastChangeTime = currentTime
+                if canDown() {
+                    nowMutiSquare.moveDown()    // 方块可以移动，进行移动
+                }
+                // 积木是否到底
+                if( nowMutiSquare.getIsEnd()){
+                    print("方块不可下移，移动到底部了")
+                    squarePool.mark(nowSquare: nowMutiSquare)   // 记录当前积木进入积木池
+                    print("积木结束积木池当前积木")
+                    squarePool.show()                           // 打印积木形状
+                    // 消行 计分 满格删除下沉
+                    gameScore += squarePool.full()
+                    print("发现满行清理满行积木池当前积木")
+                    squarePool.show()
+                    if(squarePool.overflow()){
+                        // 超行，game over
+                        print("game over ,wait for restart ")
+    //                    nowMutiSquare = nil
+    //                    squarePool.clear()
+                        gameStatus = "game over"
+                    }else{
+                        // game playing
+                        makeRandomSquare()                          // 生成新积木
+                    }
+                    return
+                }
             }
-            // 积木是否到底
-            if(  nowMutiSquare.getIsEnd() ){
-                print("方块不可下移，移动到底部了")
-                squarePool.mark(nowSquare: nowMutiSquare)   // 记录
-                squarePool.show()                           // 打印积木形状
-                makeRandomSquare()                          // 生成新积木
-                return
-            }
-            // 记录当前积木进入积木池
-            // 满格删除下沉
-
         }
     }
     
     func makeRandomSquare(){
         
-        let type = arc4random() % 7 // 随机积木
+//        let type = arc4random() % 7 // 随机积木
 //        let status  = 0             // 默认初始状态
         // 生成复杂的方块组合
+        let type = 0
         switch type {
             case 0:
                 self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareL.imagesName,shapeArray: SquareL.array)
             case 1:
                 self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareO.imagesName,shapeArray: SquareO.array)
             case 2:
-                self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareZL.imagesName,shapeArray: SquareZL.array)
+//                self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareZL.imagesName,shapeArray: SquareZL.array)
+                self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareO.imagesName,shapeArray: SquareO.array)
             case 3:
-                self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareZR.imagesName,shapeArray: SquareZR.array)
+//                self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareZR.imagesName,shapeArray: SquareZR.array)
+                self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareO.imagesName,shapeArray: SquareO.array)
             case 4:
                 self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareSL.imagesName,shapeArray: SquareSL.array)
             case 5:
@@ -146,9 +165,9 @@ extension GameMainLayer{
         if nowMutiSquare == nil {
             return false      // 组合方块不存在，则结束
         }
-        if nowMutiSquare.getTop() == 0 {
-            return false      // 可下移次数结束，结束
-        }
+//        if nowMutiSquare.getTop() == 0 {
+//            return false      // 可下移次数结束，结束
+//        }
         // 判定当前积木命中范围
         if( squarePool.hit(nowSquare: nowMutiSquare)){
             // 下一步收到阻碍
