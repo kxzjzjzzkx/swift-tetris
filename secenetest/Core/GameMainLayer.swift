@@ -128,18 +128,16 @@ class GameMainLayer: SKNode{
 //        let type = arc4random() % 7 // 随机积木
 //        let status  = 0             // 默认初始状态
         // 生成复杂的方块组合
-        let type = 0
+        let type = 1
         switch type {
             case 0:
                 self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareL.imagesName,shapeArray: SquareL.array)
             case 1:
                 self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareO.imagesName,shapeArray: SquareO.array)
             case 2:
-//                self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareZL.imagesName,shapeArray: SquareZL.array)
-                self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareO.imagesName,shapeArray: SquareO.array)
+                self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareZL.imagesName,shapeArray: SquareZL.array)
             case 3:
-//                self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareZR.imagesName,shapeArray: SquareZR.array)
-                self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareO.imagesName,shapeArray: SquareO.array)
+                self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareZR.imagesName,shapeArray: SquareZR.array)
             case 4:
                 self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareSL.imagesName,shapeArray: SquareSL.array)
             case 5:
