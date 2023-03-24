@@ -13,12 +13,12 @@ class SquareEntity : SKSpriteNode {
     var leftLimit = 4
     var downLimit = 20
     var sid = 0
-    
+    var lightStatus = 0
     
     required public init(imageNamed: String){
         let texture = SKTexture(imageNamed:imageNamed)
         super.init(texture: texture, color: UIColor.clear, size: texture.size())
-//        self.init(imageNamed: imageNamed)
+        self.lightStatus = 0
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -27,6 +27,14 @@ class SquareEntity : SKSpriteNode {
     
     func setSid(sid:Int){
         self.sid = sid
+    }
+    
+    func setLightOn(){
+        self.lightStatus = 1
+    }
+    
+    func setLightOff(){
+        self.lightStatus = 0
     }
     
     // 是否能左移动

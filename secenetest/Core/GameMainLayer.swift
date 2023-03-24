@@ -10,6 +10,7 @@ import SpriteKit
 class GameMainLayer: SKNode{
 
     var nowSquare: SquareEntity! = nil              // 当前积木
+    var nextSquare: SquareEntity! = nil             // 下一个积木-预告
     var nowMutiSquare: MutiSquareEntity! = nil      // 当前积木-组合
     var squarePool: SquarePool! = SquarePool()      // 积木池
     var countSquare: SKSpriteNode! = nil            // 累计积木
@@ -19,6 +20,8 @@ class GameMainLayer: SKNode{
     
     var gameStatus = "playing"
     var gameScore = 0
+    
+    var fullArray = [Int]()
     
     override init(){
         super.init()
@@ -44,6 +47,9 @@ class GameMainLayer: SKNode{
         mainRight.anchorPoint = CGPoint.zero
         mainRight.position = CGPoint(x: unit*10,y: 0)
         self.addChild(mainRight)
+        
+        squarePool.initPool()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,17 +72,22 @@ class GameMainLayer: SKNode{
         }
     }
     
+    // 左移动
     func moveLeft(){
-        if nowMutiSquare != nil {
+        if canLeft(){
             nowMutiSquare.moveLeft()
+        }else{
+            print("不可左移")
         }
     }
     
+    // 右移动
     func moveRight(){
-        if nowMutiSquare != nil {
+        if canRight(){
             nowMutiSquare.moveRight()
+        }else{
+            print("不可右移")
         }
-        
     }
     // 转向
     func turn(){
@@ -91,6 +102,18 @@ class GameMainLayer: SKNode{
         // 单位时间到，game继续进行
         if(gameStatus=="game over"){
             // game over
+            print("game over ,wait for restart ")
+        }else if(gameStatus=="rebuild"){
+            if self.fullArray.count>0{
+                let i = squarePool.getOneFull()
+                squarePool.clearByRow(row: i)
+                squarePool.rowDown(row: i)
+                fullArray.remove(at: 0)
+                squarePool.show()
+            }else{
+                gameStatus = "playing"
+                makeRandomSquare();     // 新生成积木
+            }
         }else{
             if(currentTime-lastChangeTime>=timeLimit){
                 lastChangeTime = currentTime
@@ -104,18 +127,20 @@ class GameMainLayer: SKNode{
                     print("积木结束积木池当前积木")
                     squarePool.show()                           // 打印积木形状
                     // 消行 计分 满格删除下沉
-                    gameScore += squarePool.full()
-                    print("发现满行清理满行积木池当前积木")
-                    squarePool.show()
-                    if(squarePool.overflow()){
+                    self.fullArray = squarePool.findFullRows()
+                    if(fullArray.count > 0){
+                        gameScore += fullArray.count * 100
+                        print("发现满行清理满行积木池当前积木 wait for build")
+                        squarePool.show()
+                        gameStatus = "rebuild"
+                        return
+                    }
+                    if(squarePool.isOverflow()){
                         // 超行，game over
                         print("game over ,wait for restart ")
-    //                    nowMutiSquare = nil
-    //                    squarePool.clear()
                         gameStatus = "game over"
                     }else{
-                        // game playing
-                        makeRandomSquare()                          // 生成新积木
+                        makeRandomSquare();     // 新生成积木
                     }
                     return
                 }
@@ -125,10 +150,10 @@ class GameMainLayer: SKNode{
     
     func makeRandomSquare(){
         
-//        let type = arc4random() % 7 // 随机积木
+        let type = arc4random() % 7 // 随机积木
 //        let status  = 0             // 默认初始状态
         // 生成复杂的方块组合
-        let type = 1
+//        let type = 1
         switch type {
             case 0:
                 self.nowMutiSquare = MutiSquareEntity(imageNamed: SquareL.imagesName,shapeArray: SquareL.array)
@@ -156,6 +181,28 @@ extension GameMainLayer{
     // 是否能变换的 判断
     func canTurn(){
     
+    }
+    
+    func canLeft() -> Bool{
+        if nowMutiSquare == nil {
+            return false      // 组合方块不存在，则结束
+        }
+        if squarePool.hitLeft(nowSquare: nowMutiSquare){
+            print("左边有积木，不可移动")
+            return false
+        }
+        return true
+    }
+    
+    func canRight() -> Bool {
+        if nowMutiSquare == nil {
+            return false      // 组合方块不存在，则结束
+        }
+        if squarePool.hitRight(nowSquare: nowMutiSquare){
+            print("右边有积木，不可移动")
+            return false
+        }
+        return true
     }
     
     // 是否能下降
